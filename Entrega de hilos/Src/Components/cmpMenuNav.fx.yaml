@@ -1,0 +1,88 @@
+cmpMenuNav As CanvasComponent:
+    ExpandMenu: =true
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =768
+    MenuItems: =
+    OnReset: |
+        =Set(showMenu, cmpMenuNav.ExpandMenu);
+        Set(showPerfil, cmpMenuNav.ExpandMenu);
+    Width: |+
+        =270
+        
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    frmMenu As gallery.galleryVertical:
+        Fill: =RGBA(109, 49, 162, 1)
+        Height: =697
+        Items: =cmpMenuNav.MenuItems
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =71
+        Visible: =showMenu
+        Width: =270
+        Y: =71
+        ZIndex: =2
+
+        icnMenu As icon.Add:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =70
+            Icon: =ThisItem.MenuIcon
+            OnSelect: =Select(Parent)
+            PaddingBottom: =15
+            PaddingLeft: =15
+            PaddingRight: =15
+            PaddingTop: =15
+            Width: =70
+            ZIndex: =2
+
+        lblMenu As label:
+            Color: =RGBA(237, 237, 237, 1)
+            Font: =Font.Arial
+            Height: =70
+            OnSelect: =Select(Parent)
+            Size: =20
+            Text: =ThisItem.MenuLabel
+            Width: =200
+            X: =70
+            ZIndex: =3
+
+        btnMenu As button:
+            BorderThickness: =0
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =70
+            HoverFill: =RGBA(149, 149, 149, 0.15)
+            OnSelect: |-
+                =Set(showMenu, !showMenu);
+                Set(showPerfil, !showPerfil);
+                Navigate(ThisItem.MenuScreenNavigate,ScreenTransition.Cover);
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedFill: =Color.Transparent
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =270
+            ZIndex: =4
+
+    Icon1 As icon.DetailList:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =70
+        Icon: =Icon.Hamburger
+        OnSelect: |-
+            =Set(showMenu, !showMenu);
+            Set(showPerfil, !showPerfil);
+        PaddingBottom: =15
+        PaddingLeft: =15
+        PaddingRight: =15
+        PaddingTop: =15
+        Width: =70
+        Y: =1
+        ZIndex: =5
+

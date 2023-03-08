@@ -1,0 +1,686 @@
+Edicion As screen:
+
+    Rectangle2_1 As rectangle:
+        BorderColor: =RGBA(109, 49, 162, 1)
+        Fill: =RGBA(109, 49, 162, 1)
+        Height: =156
+        Width: =1366
+        ZIndex: =1
+
+    Image2_1 As image:
+        Image: ='1200px-Hanes-logo.svg-1024x899'
+        X: =1266
+        ZIndex: =2
+
+    galeriahilos As gallery.galleryVertical:
+        Height: =612
+        Items: |-
+            =Filter('Control de Hilos',
+                IsBlank(cbxPlanta2.SelectedItems.Value) ||
+                IsBlank(cbxPlanta2.Selected.Result) ||
+                IsEmpty(cbxPlanta2.Selected) ||
+                IsNumeric(cbxPlanta2.Selected.Value) ||
+                Planta.Value = cbxPlanta2.Selected.Result
+                ,
+                IsBlank(cbxPlanta2.SelectedItems.Value) ||
+                IsBlank(cbxPlanta2.Selected.Result) ||
+                IsEmpty(cbxPlanta2.Selected) ||
+                IsNumeric(cbxPlanta2.Selected.Value) ||
+                Planta.Value = cbxPlanta2.Selected.Result
+                ,
+                IsBlank(cbxRepartidor2.SelectedItems.Value) ||
+                IsBlank(cbxRepartidor2.Selected.Result) ||
+                IsEmpty(cbxRepartidor2.Selected) ||
+                IsNumeric(cbxRepartidor2.Selected.Value) ||
+                Repartidor.Value = cbxRepartidor2.Selected.Result
+            )
+        Layout: =Layout.Vertical
+        TemplateSize: =61
+        Width: =1366
+        Y: =156
+        ZIndex: =3
+
+        Label3 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Item A(T18)'
+            Width: =94
+            X: =5
+            ZIndex: =1
+
+        Label4 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Repartidor.Value
+            Width: =111
+            X: =428
+            ZIndex: =3
+
+        Label5 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Fecha de requerido'
+            Width: =109
+            X: =891
+            ZIndex: =4
+
+        Label6 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Fecha de entrega'
+            Width: =126
+            X: =1009
+            ZIndex: =5
+
+        Label7 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Planta.Value
+            Width: =49
+            X: =699
+            ZIndex: =6
+
+        Label11 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Estado.Value
+            Width: =126
+            X: =758
+            ZIndex: =10
+
+        Label13 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Equipos.Value
+            Width: =145
+            X: =560
+            ZIndex: =12
+
+        Icon4 As icon.Edit:
+            Color: =RGBA(109, 49, 162, 1)
+            DisplayMode: |-
+                =If(varpermisos = "master" Or varpermisos="dispatcher" Or varpermisos="manager",
+                DisplayMode.Edit,
+                DisplayMode.Disabled
+                )
+            Height: =65
+            Icon: =Icon.Edit
+            OnSelect: =Set(ItemID,ThisItem.ID);Navigate(Entrega);EditForm(EditasHilos);
+            Width: =50
+            X: =1195
+            ZIndex: =14
+
+        Icon5 As icon.Erase:
+            Color: =RGBA(109, 49, 162, 1)
+            DisplayMode: |-
+                =If(varpermisos = "master" Or varpermisos="manager",
+                DisplayMode.Edit,
+                DisplayMode.Disabled
+                )
+            Height: =65
+            Icon: =Icon.Erase
+            OnSelect: =Set(varshowdelete,true)
+            Width: =50
+            X: =1306
+            Y: =1
+            ZIndex: =15
+
+        Icon6 As icon.View:
+            Color: =RGBA(109, 49, 162, 1)
+            Height: =65
+            Icon: =Icon.View
+            OnSelect: =Set(ItemID,ThisItem.ID);Navigate(Requerimiento);ViewForm(EnviarHilos);
+            Width: =50
+            X: =1250
+            ZIndex: =16
+
+        Label1 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Item B(T24PC)'
+            Width: =109
+            X: =143
+            ZIndex: =17
+
+        Label1_1 As label:
+            Align: =Align.Center
+            Height: =60
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.'Item C(T24TP)'
+            Width: =130
+            X: =269
+            ZIndex: =18
+
+        Checkbox3 As checkbox:
+            BorderColor: =RGBA(109, 49, 162, 1)
+            CheckboxBorderColor: =RGBA(109, 49, 162, 1)
+            CheckmarkFill: =RGBA(109, 49, 162, 1)
+            Default: =ThisItem.ID in colSelected
+            Height: =65
+            HoverColor: =RGBA(109, 49, 162, 1)
+            OnCheck: |-
+                =Collect(
+                    colSelected,
+                    ThisItem.ID
+                )
+            OnSelect: =Select(Parent)
+            OnUncheck: =
+            Text: =""
+            Width: =50
+            X: =1145
+            ZIndex: =19
+
+        Icon7 As icon.CancelBadge:
+            Color: =If(ThisItem.Estado.Value="Requerido" Or ThisItem.Estado.Value="Entregado",RGBA(124,252,0,1),ThisItem.Estado.Value="Pendiente",RGBA(255,255,0,1),ThisItem.Estado.Value="Rechazado",RGBA(255,0,0,1),RGBA(173,216,230,1))
+            DisplayMode: =DisplayMode.View
+            Height: =32
+            Icon: =If(ThisItem.Estado.Value="Requerido" Or ThisItem.Estado.Value="Entregado",Icon.CheckBadge,ThisItem.Estado.Value="Pendiente",Icon.Information,ThisItem.Estado.Value="Rechazado",Icon.CancelBadge,Icon.ThumbsUp)
+            OnSelect: =Select(Parent)
+            Width: =20
+            X: =864
+            Y: =29
+            ZIndex: =20
+
+    Rectangle1 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =10
+        OnSelect: =
+        Width: =1366
+        Y: =100
+        ZIndex: =8
+
+    Rectangle1_1 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =120
+        Y: =110
+        ZIndex: =9
+
+    Rectangle1_2 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =260
+        Y: =110
+        ZIndex: =10
+
+    Rectangle1_3 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =405
+        Y: =110
+        ZIndex: =11
+
+    Group3 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =11
+
+        Rectangle3 As rectangle:
+            Fill: =RGBA(109, 49, 162, 0.4)
+            Height: =283
+            Visible: =varshowdelete
+            Width: =424
+            X: =453
+            Y: =242
+            ZIndex: =4
+
+        Button3 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 0, 0, 1)
+            Font: =Font.Georgia
+            HoverFill: =RGBA(255, 0, 0, 0.3)
+            OnSelect: |-
+                =Remove('Control de Hilos',galeriahilos.Selected);
+                Set(varshowdelete,false);
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: ="Eliminar"
+            Visible: =varshowdelete
+            X: =500
+            Y: =432
+            ZIndex: =5
+
+        Button4 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(152, 208, 70, 1)
+            Font: =Font.Georgia
+            HoverFill: =RGBA(152, 208, 70, 0.3)
+            OnSelect: =Set(varshowdelete,false)
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: ="Cancelar"
+            Visible: =varshowdelete
+            X: =680
+            Y: =432
+            ZIndex: =6
+
+        Label15 As label:
+            Align: =Align.Center
+            Font: =Font.Georgia
+            FontWeight: =FontWeight.Bold
+            Height: =42
+            Text: ="¿Desea borrar esta caja de hilo?"
+            Visible: =varshowdelete
+            Width: =308
+            X: =523
+            Y: =325
+            ZIndex: =7
+
+    Rectangle1_4 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =542
+        Y: =110
+        ZIndex: =12
+
+    Label8 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Size: =12
+        Text: ="Item A(T18)"
+        Width: =104
+        Y: =116
+        ZIndex: =13
+
+    Label8_1 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Item B(T24PC)"
+        Width: =115
+        X: =138
+        Y: =110
+        ZIndex: =14
+
+    Label8_2 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Item C(T24TP)"
+        Width: =115
+        X: =275
+        Y: =113
+        ZIndex: =15
+
+    Label8_3 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Repartidor"
+        Width: =115
+        X: =417
+        Y: =113
+        ZIndex: =16
+
+    Label8_4 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Equipo"
+        Width: =133
+        X: =552
+        Y: =113
+        ZIndex: =17
+
+    Rectangle1_5 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =688
+        Y: =110
+        ZIndex: =18
+
+    Label8_5 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =43
+        Size: =12
+        Text: ="Planta"
+        Width: =57
+        X: =700
+        Y: =113
+        ZIndex: =19
+
+    Rectangle1_6 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =755
+        Y: =110
+        ZIndex: =20
+
+    Label8_6 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Estado"
+        Width: =94
+        X: =767
+        Y: =110
+        ZIndex: =21
+
+    Label8_7 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Entregado el"
+        Width: =114
+        X: =887
+        Y: =111
+        ZIndex: =22
+
+    Rectangle1_7 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =59
+        OnSelect: =
+        Width: =10
+        X: =877
+        Y: =101
+        ZIndex: =23
+
+    Rectangle1_8 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =1004
+        Y: =111
+        ZIndex: =24
+
+    Label8_8 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =46
+        Size: =12
+        Text: ="Recibido el"
+        Width: =114
+        X: =1014
+        Y: =110
+        ZIndex: =25
+
+    Rectangle1_9 As rectangle:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =46
+        OnSelect: =
+        Width: =10
+        X: =1135
+        Y: =113
+        ZIndex: =26
+
+    cbxEquipo2 As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        Color: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        Height: =39
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: |-
+            ="Elige el equipo
+            "
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxEquipo2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxEquipo2: Sort(
+                            Filter(
+                                Distinct(
+                                    Equipos,
+                                    Title
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxEquipo2"
+            )
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxEquipo2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxEquipo2: Sort(
+                            Filter(
+                                Distinct(
+                                    Equipos,
+                                    Title
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxEquipo2"
+            ),cbxEquipo2.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        Width: =210
+        X: =636
+        Y: =31
+        ZIndex: =27
+
+    cbxRepartidor2 As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        HoverBorderColor: =RGBA(109, 49, 162, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: ="Elige el repartidor "
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxRepartidor2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxRepartidor2: Sort(
+                            Filter(
+                                Distinct(
+                                    Repartidores,
+                                    Repartidores
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxRepartidor2"
+            )
+        PressedBorderColor: =ColorFade(Self.BorderColor, 15%)
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxRepartidor2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxRepartidor2: Sort(
+                            Filter(
+                                Distinct(
+                                    Repartidores,
+                                    Repartidores
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxRepartidor2"
+            ),cbxRepartidor2.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        Width: =257
+        X: =876
+        Y: =31
+        ZIndex: =28
+
+    cbxPlanta2 As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        Height: =39
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: ="Planta"
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxPlanta: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxPlanta: Sort(
+                            Filter(
+                                Distinct(
+                                    Plantas,
+                                    Plantas
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxPlanta"
+            )
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxPlanta: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxPlanta: Sort(
+                            Filter(
+                                Distinct(
+                                    Plantas,
+                                    Plantas
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxPlanta"
+            ),cbxPlanta2.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        Width: =104
+        X: =495
+        Y: =29
+        ZIndex: =29
+
+    Button7 As button:
+        Fill: =RGBA(255, 0, 0, 1)
+        Height: =39
+        OnSelect: |-
+            =UpdateIf(
+                'Control de Hilos',
+                ID in colSelected,
+                {'Bin Transfer': {Value: "SI"}}
+            );
+            Notify("Se han marcado para transferir los nuevos Items",NotificationType.Success)
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Text: ="Bin Transfer"
+        Width: =132
+        X: =345
+        Y: =29
+        ZIndex: =33
+
+    cmpMenuNav_4 As cmpMenuNav:
+        MenuItems: =C_MenuNav
+        ZIndex: =34
+
+    Group2_2 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =36
+
+        Icon3_3 As icon.Download:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =100
+            Icon: =Icon.Download
+            OnSelect: |-
+                =Launch("https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite/_vti_bin/owssvr.dll?CS=65001&Using=%5Flayouts%2F15%2Fquery%2Eiqy&List=caa8f130%2Dcab9%2D4bed%2D8a43%2Dc9f0a76e43fe&View=332AA90A%2D0315%2D4518%2DA08D%2D2F8E22D711B8&RootFolder=&CacheControl=1")
+            Width: =91
+            X: =1170
+            Y: =1
+            ZIndex: =30
+
+        Image4_2 As image:
+            Height: =26
+            Image: ='excel-logo-1-2048x1905'
+            OnSelect: |-
+                =Launch("https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite/_vti_bin/owssvr.dll?CS=65001&Using=%5Flayouts%2F15%2Fquery%2Eiqy&List=caa8f130%2Dcab9%2D4bed%2D8a43%2Dc9f0a76e43fe&View=332AA90A%2D0315%2D4518%2DA08D%2D2F8E22D711B8&RootFolder=&CacheControl=1")
+            Width: =28
+            X: =1170
+            Y: =71
+            ZIndex: =31
+

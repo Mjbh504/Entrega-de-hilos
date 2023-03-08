@@ -1,0 +1,143 @@
+{
+  "0edf3dde-5eb8-4361-ac68-60af4c92d395": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/juanq/gateway/greyhound/3000.150.11/1.0.1613.3116/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite": {
+        "dataSources": {
+          "Control de Hilos": {
+            "tableName": "caa8f130-cab9-4bed-8a43-c9f0a76e43fe"
+          },
+          "Equipos": {
+            "tableName": "ff5de2fd-e268-4685-8779-3a95dedeabf0"
+          },
+          "Plantas": {
+            "tableName": "73cb1abd-9540-4175-a1c3-0d38354f3b0f"
+          },
+          "Repartidores": {
+            "tableName": "51706a7e-feba-477f-87dc-e3e360671d92"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Control de Hilos",
+      "Plantas",
+      "Equipos",
+      "Repartidores"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "0edf3dde-5eb8-4361-ac68-60af4c92d395"
+  },
+  "3a82e57d-003d-4b24-a3d8-43ab872353f7": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1618/1.0.1618.3179/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Outlook"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "3a82e57d-003d-4b24-a3d8-43ab872353f7"
+  },
+  "3ce575fa-532c-4346-b763-aaa6baaeef84": {
+    "connectionParameters": {
+      "workFlowCallbackUri": "https://prod-72.westus.logic.azure.com:443/workflows/1bc2b6fc9d9e4a9c9ee3c730c8e8e3f6/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Pl2N1v1q8Jo0X69o_k15Ue3uoAz1qdJxP3JUYsIr1_4",
+      "workflowEndpoint": "/subscriptions/34eedfbf-3e33-475d-b510-23537fba3dc9/resourceGroups/333b3fe469f04013a0eb5bcb97f52644-83850a49228f40c4a2bcc804db5ff3aa/providers/Microsoft.Logic/workflows/1858c3a1-53d5-4be2-a91f-c291dc6c6a4d",
+      "workflowName": "1858c3a1-53d5-4be2-a91f-c291dc6c6a4d",
+      "workflowPath": "/subscriptions/34eedfbf-3e33-475d-b510-23537fba3dc9/resourceGroups/333b3fe469f04013a0eb5bcb97f52644-83850a49228f40c4a2bcc804db5ff3aa/providers/Microsoft.Logic/workflows/1858c3a1-53d5-4be2-a91f-c291dc6c6a4d"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1615/1.0.1615.3163/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "1858c3a1-53d5-4be2-a91f-c291dc6c6a4d"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "1858c3a1-53d5-4be2-a91f-c291dc6c6a4d"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "ExportExcel"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "3ce575fa-532c-4346-b763-aaa6baaeef84"
+  },
+  "cbbd99d1-a84d-4589-8d76-84c48a79c36d": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1618/1.0.1618.3179/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "cbbd99d1-a84d-4589-8d76-84c48a79c36d"
+  },
+  "edd0a5cb-13de-4027-89b4-46def056fd47": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/juanq/gateway/greyhound/3000.150.11/1.0.1613.3116/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite": {
+        "dataSources": {
+          "registros": {
+            "tableName": "96ee99e2-86fe-43df-83a7-a10528866949"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "registros"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "edd0a5cb-13de-4027-89b4-46def056fd47"
+  }
+}

@@ -1,0 +1,900 @@
+Requerimiento As screen:
+
+    Rectangle2_3 As rectangle:
+        BorderColor: =RGBA(109, 49, 162, 1)
+        Fill: =RGBA(109, 49, 162, 1)
+        Width: =1366
+        ZIndex: =1
+
+    Button1 As button:
+        Fill: =RGBA(109, 49, 162, 1)
+        Height: =63
+        HoverBorderColor: =RGBA(255, 0, 0, 0.5)
+        HoverFill: =RGBA(255, 0, 0, 0.5)
+        OnSelect: |
+            =Navigate('Base de Datos');
+            ResetForm(EnviarHilos);
+        PressedBorderColor: =RGBA(255, 0, 0, 1)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(255, 0, 0, 1)
+        Text: ="Cancelar"
+        Width: =252
+        X: =355
+        Y: =664
+        ZIndex: =2
+
+    Button2 As button:
+        Fill: =RGBA(109, 49, 162, 1)
+        Height: =63
+        HoverBorderColor: =RGBA(152, 208, 70, 0.5)
+        HoverFill: =RGBA(152, 208, 70, 0.5)
+        OnSelect: |
+            =ClearCollect(
+                ResultCollect,
+                Filter(
+                    'Control de Hilos',
+                    Estado.Value = "Requerido" Or Estado.Value="Entregado" Or Estado.Value="Pendiente",
+                    Equipos.Value = TarjetaEquipos.Selected.Value
+                )
+            );
+            If(
+                CountRows(ResultCollect) > 2,
+                Notify(
+                    "No se puede ingresar mas de 3 pack hable con el encargado para hacer una excepcion",
+                    NotificationType.Error
+                ),
+                CountRows(ResultCollect) > 1,
+                Set(
+                    varEstado,
+                    "Pendiente"
+                );
+                Notify(
+                    "Ya son mas de 2 veces este equipo recibe pack de hilos deberas requerir aprobacion al encargado de la bodega",
+                    NotificationType.Error
+                );
+                SubmitForm(EnviarHilos);
+                Navigate('Base de Datos');
+                ResetForm(EnviarHilos);
+                Set(
+                    varEstado,
+                    "Requerido"
+                ),
+                //Default//
+                SubmitForm(EnviarHilos);
+                Notify(
+                    "Se ha guardado Existosamente",
+                    NotificationType.Success
+                );
+                Navigate('Base de Datos');
+                ResetForm(EnviarHilos);
+                Set(
+                    varEstado,
+                    "Requerido"
+                );
+                
+            );
+        PressedBorderColor: =RGBA(152, 208, 70, 1)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(152, 208, 70, 1)
+        Text: ="Guardar "
+        Width: =252
+        X: =780
+        Y: =664
+        ZIndex: =3
+
+    Image2_3 As image:
+        Image: ='1200px-Hanes-logo.svg-1024x899'
+        X: =1266
+        ZIndex: =4
+
+    EnviarHilos As form:
+        DataSource: ='Control de Hilos'
+        DefaultMode: =FormMode.New
+        Height: =528
+        Item: =LookUp('Control de Hilos',ID=ItemID)
+        Width: =1366
+        Y: =100
+        ZIndex: =5
+
+        "'Item A(T28P)_DataCard4' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Title"
+            Default: =ThisItem.'Item A(T18)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Title")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Control de Hilos'], DataSourceInfo.MaxLength, "Title")
+            Required: |
+                =
+            Update: =DataCardValue120.Text
+            Width: =455
+            X: =0
+            Y: =0
+            ZIndex: =8
+
+            DataCardKey120 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue120 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                MaxLength: =6
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey120.Y + DataCardKey120.Height + 5
+                ZIndex: =2
+
+            ErrorMessage120 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue120.Y + DataCardValue120.Height
+                ZIndex: =3
+
+            StarVisible120 As label:
+                Align: =Align.Center
+                Height: =DataCardKey120.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey120.Y
+                ZIndex: =4
+
+        "'Item B(T24PC)_DataCard7' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="ItemB_x0028_T24PC_x0029_"
+            Default: =ThisItem.'Item B(T24PC)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"ItemB_x0028_T24PC_x0029_")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Control de Hilos'], DataSourceInfo.MaxLength, "ItemB_x0028_T24PC_x0029_")
+            Required: =false
+            Update: =DataCardValue128.Text
+            Width: =455
+            X: =1
+            Y: =0
+            ZIndex: =8
+
+            DataCardKey128 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue128 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                MaxLength: =6
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey128.Y + DataCardKey128.Height + 5
+                ZIndex: =2
+
+            ErrorMessage128 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue128.Y + DataCardValue128.Height
+                ZIndex: =3
+
+            StarVisible128 As label:
+                Align: =Align.Center
+                Height: =DataCardKey128.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey128.Y
+                ZIndex: =4
+
+        "'Item C(T24TP)_DataCard7' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="ItemC_x0028_T24TP_x0029_"
+            Default: =ThisItem.'Item C(T24TP)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"ItemC_x0028_T24TP_x0029_")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Control de Hilos'], DataSourceInfo.MaxLength, "ItemC_x0028_T24TP_x0029_")
+            Required: =false
+            Update: =DataCardValue129.Text
+            Width: =455
+            X: =2
+            Y: =0
+            ZIndex: =8
+
+            DataCardKey129 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue129 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                MaxLength: =6
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey129.Y + DataCardKey129.Height + 5
+                ZIndex: =2
+
+            ErrorMessage129 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue129.Y + DataCardValue129.Height
+                ZIndex: =3
+
+            StarVisible129 As label:
+                Align: =Align.Center
+                Height: =DataCardKey129.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey129.Y
+                ZIndex: =4
+
+        "'Libras A(T28P)_DataCard4' As typedDataCard.numberEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="LibrasA_x0028_T28P_x0029_"
+            Default: =ThisItem.'Cant Req. A(T28P)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"LibrasA_x0028_T28P_x0029_")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =Value(DataCardValue131.Text)
+            Width: =455
+            X: =0
+            Y: =1
+            ZIndex: =8
+
+            DataCardKey131 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue131 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Format: =TextFormat.Number
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey131.Y + DataCardKey131.Height + 5
+                ZIndex: =2
+
+            ErrorMessage131 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue131.Y + DataCardValue131.Height
+                ZIndex: =3
+
+            StarVisible131 As label:
+                Align: =Align.Center
+                Height: =DataCardKey131.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey131.Y
+                ZIndex: =4
+
+        "'libras B(T24PC)_DataCard4' As typedDataCard.textualEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="librasB_x0028_T24PC_x0029_"
+            Default: =ThisItem.'Cant Req. B(T24PC)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"librasB_x0028_T24PC_x0029_")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Control de Hilos'], DataSourceInfo.MaxLength, "librasB_x0028_T24PC_x0029_")
+            Required: =false
+            Update: =DataCardValue132.Text
+            Width: =455
+            X: =1
+            Y: =1
+            ZIndex: =8
+
+            DataCardKey132 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue132 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey132.Y + DataCardKey132.Height + 5
+                ZIndex: =2
+
+            ErrorMessage132 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue132.Y + DataCardValue132.Height
+                ZIndex: =3
+
+            StarVisible132 As label:
+                Align: =Align.Center
+                Height: =DataCardKey132.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey132.Y
+                ZIndex: =4
+
+        "'Libras C(T24TP)_DataCard4' As typedDataCard.numberEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="LibrasC_x0028_T24TP_x0029_"
+            Default: =ThisItem.'Cant Req. C(T24TP)'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"LibrasC_x0028_T24TP_x0029_")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =Value(DataCardValue133.Text)
+            Width: =455
+            X: =2
+            Y: =1
+            ZIndex: =8
+
+            DataCardKey133 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue133 As text:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Format: =TextFormat.Number
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey133.Y + DataCardKey133.Height + 5
+                ZIndex: =2
+
+            ErrorMessage133 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue133.Y + DataCardValue133.Height
+                ZIndex: =3
+
+            StarVisible133 As label:
+                Align: =Align.Center
+                Height: =DataCardKey133.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey133.Y
+                ZIndex: =4
+
+        Planta_DataCard11 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Planta"
+            Default: =ThisItem.Planta
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Planta")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Update: =DataCardValue124.Selected
+            Width: =455
+            X: =0
+            Y: =2
+            ZIndex: =8
+
+            DataCardKey124 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue124 As combobox:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                ChevronBackground: =RGBA(109, 49, 162, 1)
+                ChevronHoverBackground: =RGBA(109, 49, 162, 0.5)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                InputTextPlaceholder: ="Ingresa la Planta"
+                Items: =Choices([@'Control de Hilos'].Planta)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedFill: =RGBA(109, 49, 162, 1)
+                SearchFields: =["Value"]
+                SearchItems: =Choices('Control de Hilos'.Planta,DataCardValue124.SearchText)
+                SelectMultiple: =false
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey124.Y + DataCardKey124.Height + 5
+                ZIndex: =2
+
+            ErrorMessage124 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue124.Y + DataCardValue124.Height
+                ZIndex: =3
+
+            StarVisible124 As label:
+                Align: =Align.Center
+                Height: =DataCardKey124.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey124.Y
+                ZIndex: =4
+
+        Equipos_DataCard7 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Equipos"
+            Default: =ThisItem.Equipos
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Equipos")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Update: =TarjetaEquipos.Selected
+            Width: =455
+            X: =1
+            Y: =2
+            ZIndex: =8
+
+            DataCardKey126 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            TarjetaEquipos As combobox:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                ChevronBackground: =RGBA(109, 49, 162, 1)
+                ChevronHoverBackground: =RGBA(109, 49, 162, 0.5)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                InputTextPlaceholder: ="Ingrese el equipo"
+                Items: =Choices([@'Control de Hilos'].Equipos)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedFill: =RGBA(109, 49, 162, 1)
+                SearchFields: =["Value"]
+                SearchItems: =Choices('Control de Hilos'.Equipos,TarjetaEquipos.SearchText)
+                SelectMultiple: =false
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey126.Y + DataCardKey126.Height + 5
+                ZIndex: =2
+
+            ErrorMessage126 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =TarjetaEquipos.Y + TarjetaEquipos.Height
+                ZIndex: =3
+
+            StarVisible126 As label:
+                Align: =Align.Center
+                Height: =DataCardKey126.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey126.Y
+                ZIndex: =4
+
+        Bonders_DataCard7 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Bonders"
+            Default: =ThisItem.Repartidor
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Bonders")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: |
+                =true
+            Update: =DataCardValue121.Selected
+            Width: =455
+            X: =2
+            Y: =2
+            ZIndex: =8
+
+            DataCardKey121 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue121 As combobox:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                ChevronBackground: =RGBA(109, 49, 162, 1)
+                ChevronHoverBackground: =RGBA(109, 49, 162, 0.5)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                InputTextPlaceholder: ="Ingresa el repartidor"
+                Items: =Choices([@'Control de Hilos'].Repartidor)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedFill: =RGBA(109, 49, 162, 1)
+                SearchFields: =["Value"]
+                SearchItems: =Choices('Control de Hilos'.Repartidor,DataCardValue121.SearchText)
+                SelectMultiple: =false
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey121.Y + DataCardKey121.Height + 5
+                ZIndex: =2
+
+            ErrorMessage121 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue121.Y + DataCardValue121.Height
+                ZIndex: =3
+
+            StarVisible121 As label:
+                Align: =Align.Center
+                Height: =DataCardKey121.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey121.Y
+                ZIndex: =4
+
+        Estado_DataCard7 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Estado"
+            Default: =ThisItem.Estado
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Estado")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue125.Selected
+            Width: =455
+            X: =0
+            Y: =3
+            ZIndex: =8
+
+            DataCardKey125 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue125 As combobox:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                ChevronBackground: =RGBA(109, 49, 162, 1)
+                ChevronHoverBackground: =RGBA(109, 49, 162, 0.5)
+                DefaultSelectedItems: =[varEstado]
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                HoverBorderColor: =RGBA(109, 49, 162, 0.5)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(109, 49, 162, 0.5)
+                Items: =Choices([@'Control de Hilos'].Estado)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedFill: =RGBA(109, 49, 162, 1)
+                SearchFields: =["Value"]
+                SearchItems: =Choices('Control de Hilos'.Estado,DataCardValue125.SearchText)
+                SelectMultiple: =false
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey125.Y + DataCardKey125.Height + 5
+                ZIndex: =2
+
+            ErrorMessage125 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue125.Y + DataCardValue125.Height
+                ZIndex: =3
+
+            StarVisible125 As label:
+                Align: =Align.Center
+                Height: =DataCardKey125.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey125.Y
+                ZIndex: =4
+
+        "'Fecha de entrega_DataCard7' As typedDataCard.dateEditCard":
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Fechadeentrega"
+            Default: =ThisItem.'Fecha de requerido'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@'Control de Hilos'],DataSourceInfo.DisplayName,"Fechadeentrega")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue122.SelectedDate
+            Width: =455
+            X: =1
+            Y: =3
+            ZIndex: =8
+
+            DataCardKey122 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue122 As datepicker:
+                BorderColor: =RGBA(109, 49, 162, 1)
+                Color: =RGBA(255, 255, 255, 1)
+                DefaultDate: =Parent.Default
+                DisplayMode: =Parent.DisplayMode
+                EndYear: =Year(Today())+100
+                Fill: =RGBA(109, 49, 162, 0.2)
+                IconBackground: =RGBA(109, 49, 162, 1)
+                IsEditable: =true
+                PaddingBottom: =0
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                StartYear: =1899
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey122.Y + DataCardKey122.Height + 5
+                ZIndex: =2
+
+            ErrorMessage122 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue122.Y + DataCardValue122.Height
+                ZIndex: =3
+
+            StarVisible122 As label:
+                Align: =Align.Center
+                Height: =DataCardKey122.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey122.Y
+                ZIndex: =4
+
+    cmpMenuNav_3 As cmpMenuNav:
+        MenuItems: =C_MenuNav
+        ZIndex: =6
+
+    Label9_1 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Verdana
+        FontWeight: =FontWeight.Semibold
+        Height: =60
+        Size: =30
+        Text: ="Modulo de Requerimiento"
+        Width: =726
+        X: =320
+        Y: =12
+        ZIndex: =7
+

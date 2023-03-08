@@ -1,0 +1,51 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |
+        =ClearCollect(
+            C_MenuNav,
+            Table(
+                {
+                    MenuLabel: "Hogar",
+                    MenuIcon: Icon.Home,
+                    MenuScreenNavigate: Hogar,
+                    MenuID: 1
+                },
+                {
+                    MenuLabel: "Requerimiento",
+                    MenuIcon: Icon.AddDocument,
+                    MenuScreenNavigate: Requerimiento,
+                    MenuID: 2
+                },
+                {
+                    MenuLabel: "Edicion",
+                    MenuIcon: Icon.Edit,
+                    MenuScreenNavigate: Edicion,
+                    MenuID: 3
+                },
+                {
+                    MenuLabel: "Base de Datos",
+                    MenuIcon: Icon.Database,
+                    MenuScreenNavigate: 'Base de Datos',
+                    MenuID: 4
+                }
+            )
+        );
+        Set(
+            varEstado,
+            "Requerido"
+        );
+        Set(
+            nombreSupervisor,
+            LookUp(
+                registros,
+                correos = User().Email
+            ).Nombres
+        );
+        Set(
+            varpermisos,
+            LookUp(
+                registros,
+                correos = User().Email
+            ).permisos
+        );
+

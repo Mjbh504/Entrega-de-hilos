@@ -1,0 +1,536 @@
+"'Base de Datos' As screen":
+
+    Rectangle2 As rectangle:
+        BorderColor: =RGBA(109, 49, 162, 1)
+        Fill: =RGBA(109, 49, 162, 1)
+        Width: =1366
+        ZIndex: =1
+
+    Image2 As image:
+        Image: ='1200px-Hanes-logo.svg-1024x899'
+        X: =1266
+        ZIndex: =2
+
+    "'Tabla Base de Datos' As dataTable.datatable":
+        BorderColor: =RGBA(109, 49, 162, 1)
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =1
+        DisplayMode: =DisplayMode.Edit
+        Fill: =RGBA(0, 0, 0, 0)
+        HeadingFill: =RGBA(109, 49, 162, 1)
+        Height: =661
+        Items: |-
+            =Filter('Control de Hilos',
+                IsBlank(cbxPlanta.SelectedItems.Value) ||
+                IsBlank(cbxPlanta.Selected.Result) ||
+                IsEmpty(cbxPlanta.Selected) ||
+                IsNumeric(cbxPlanta.Selected.Value) ||
+                Planta.Value = cbxPlanta.Selected.Result
+                ,
+                IsBlank(cbxPlanta.SelectedItems.Value) ||
+                IsBlank(cbxPlanta.Selected.Result) ||
+                IsEmpty(cbxPlanta.Selected) ||
+                IsNumeric(cbxPlanta.Selected.Value) ||
+                Planta.Value = cbxPlanta.Selected.Result
+                ,
+                IsBlank(cbxRepartidor.SelectedItems.Value) ||
+                IsBlank(cbxRepartidor.Selected.Result) ||
+                IsEmpty(cbxRepartidor.Selected) ||
+                IsNumeric(cbxRepartidor.Selected.Value) ||
+                Repartidor.Value = cbxRepartidor.Selected.Result
+            )
+        Width: =1366
+        X: =0
+        Y: =107
+        ZIndex: =3
+
+        "'Item A(T28P)_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Item A(T28P)"
+            FieldName: ="Title"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =ThisItem.'Item A(T18)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+        "'Fecha de entrega_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Fecha de entrega"
+            FieldName: ="Fechadeentrega"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =20
+            Text: =ThisItem.'Fecha de requerido'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =3
+
+        "'Fecha de recibo_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Fecha de recibo"
+            FieldName: ="Fechaderecibo"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =21
+            Text: =ThisItem.'Fecha de entrega'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =4
+
+        Planta_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Planta"
+            FieldName: ="Planta"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =17
+            Text: =ThisItem.Planta.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =5
+
+        Estado_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Estado"
+            FieldName: ="Estado"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =19
+            Text: =ThisItem.Estado.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+        Equipos_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Equipos"
+            FieldName: ="Equipos"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =16
+            Text: =ThisItem.Equipos.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =7
+
+        Comentarios_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Comentarios"
+            FieldName: ="Comentarios"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =22
+            Text: =ThisItem.Comentarios
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =8
+
+        "'Item B(T24PC)_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Item B(T24PC)"
+            FieldName: ="ItemB_x0028_T24PC_x0029_"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =5
+            Text: =ThisItem.'Item B(T24PC)'
+            Width: =100
+            X: =542
+            Y: =0
+            ZIndex: =9
+
+        "'Item C(T24TP)_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Item C(T24TP)"
+            FieldName: ="ItemC_x0028_T24TP_x0029_"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =11
+            Text: =ThisItem.'Item C(T24TP)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =10
+
+        ABIN_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="ABIN"
+            FieldName: ="ABIN"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =15
+            Text: =ThisItem.ABIN.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =11
+
+        BIN_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="BIN"
+            FieldName: ="BIN"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =14
+            Text: =ThisItem.BIN.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =15
+
+        Repartidor_Column1 As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Repartidor"
+            FieldName: ="Bonders"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =18
+            Text: =ThisItem.Repartidor.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =16
+
+        "'Cant Entregada B(T24PC)_Column1' As dataTableColumn.numberColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Entregada B(T24PC)"
+            FieldName: ="CantEntregadaB_x0028_T24PC_x0029"
+            FieldVariantName: ="numberColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =10
+            Text: =ThisItem.'Cant Entregada B(T24PC)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =17
+
+        "'Cant Entregada. A(T28P)_Column1' As dataTableColumn.numberColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Entregada. A(T28P)"
+            FieldName: ="CantEntregada_x002e_A_x0028_T28P"
+            FieldVariantName: ="numberColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =3
+            Text: =ThisItem.'Cant Entregada. A(T28P)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =18
+
+        "'Cant Entregada. C(T24TP)_Column1' As dataTableColumn.numberColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Entregada. C(T24TP)"
+            FieldName: ="CantEntregada_x002e_C_x0028_T24T"
+            FieldVariantName: ="numberColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =13
+            Text: =ThisItem.'Cant Entregada. C(T24TP)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =19
+
+        "'Cant Req. A(T28P)_Column1' As dataTableColumn.numberColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Req. A(T28P)"
+            FieldName: ="LibrasA_x0028_T28P_x0029_"
+            FieldVariantName: ="numberColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =ThisItem.'Cant Req. A(T28P)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =20
+
+        "'Cant Req. B(T24PC)_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Req. B(T24PC)"
+            FieldName: ="librasB_x0028_T24PC_x0029_"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =7
+            Text: =ThisItem.'Cant Req. B(T24PC)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =21
+
+        "'Cant Req. C(T24TP)_Column1' As dataTableColumn.numberColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Cant Req. C(T24TP)"
+            FieldName: ="LibrasC_x0028_T24TP_x0029_"
+            FieldVariantName: ="numberColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =12
+            Text: =ThisItem.'Cant Req. C(T24TP)'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =22
+
+        "'Bin Transfer_Column1' As dataTableColumn.textualColumn":
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Bin Transfer"
+            FieldName: ="BinTransfer"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =23
+            Text: =ThisItem.'Bin Transfer'.Value
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =23
+
+    cmpMenuNav_2 As cmpMenuNav:
+        MenuItems: =C_MenuNav
+        ZIndex: =6
+
+    Icon2 As icon.Reload:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =102
+        Icon: =Icon.Reload
+        OnSelect: =Refresh('Control de Hilos');
+        PaddingBottom: =15
+        PaddingLeft: =15
+        PaddingRight: =15
+        PaddingTop: =15
+        Width: =102
+        X: =1037
+        Y: =1
+        ZIndex: =7
+
+    cbxEquipo As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        Color: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        Height: =39
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: |-
+            ="Elige el equipo
+            "
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxEquipo2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxEquipo2: Sort(
+                            Filter(
+                                Distinct(
+                                    Equipos,
+                                    Title
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxEquipo2"
+            )
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxEquipo2: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxEquipo2: Sort(
+                            Filter(
+                                Distinct(
+                                    Equipos,
+                                    Title
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxEquipo2"
+            ),cbxEquipo.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        SelectMultiple: =false
+        Width: =210
+        X: =434
+        Y: =30
+        ZIndex: =8
+
+    Group2_1 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =8
+
+        Icon3_2 As icon.Download:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =100
+            Icon: =Icon.Download
+            OnSelect: |-
+                =Launch("https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite/_vti_bin/owssvr.dll?CS=65001&Using=%5Flayouts%2F15%2Fquery%2Eiqy&List=caa8f130%2Dcab9%2D4bed%2D8a43%2Dc9f0a76e43fe&View=332AA90A%2D0315%2D4518%2DA08D%2D2F8E22D711B8&RootFolder=&CacheControl=1")
+            Width: =91
+            X: =1170
+            Y: =1
+            ZIndex: =4
+
+        Image4_1 As image:
+            Height: =26
+            Image: ='excel-logo-1-2048x1905'
+            OnSelect: |-
+                =Launch("https://hanes.sharepoint.com/sites/CholomaLogisticandSuppliesTeamsite/_vti_bin/owssvr.dll?CS=65001&Using=%5Flayouts%2F15%2Fquery%2Eiqy&List=caa8f130%2Dcab9%2D4bed%2D8a43%2Dc9f0a76e43fe&View=332AA90A%2D0315%2D4518%2DA08D%2D2F8E22D711B8&RootFolder=&CacheControl=1")
+            Width: =28
+            X: =1170
+            Y: =71
+            ZIndex: =5
+
+    cbxRepartidor As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        Height: =39
+        HoverBorderColor: =RGBA(109, 49, 162, 1)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: ="Elige el repartidor "
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxRepartidor: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxRepartidor: Sort(
+                            Filter(
+                                Distinct(
+                                    Repartidores,
+                                    Repartidores
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxRepartidor"
+            )
+        PressedBorderColor: =ColorFade(Self.BorderColor, 15%)
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxRepartidor: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxRepartidor: Sort(
+                            Filter(
+                                Distinct(
+                                    Repartidores,
+                                    Repartidores
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxRepartidor"
+            ),cbxRepartidor.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        SelectMultiple: =false
+        X: =668
+        Y: =30
+        ZIndex: =9
+
+    cbxPlanta As combobox:
+        BorderColor: =RGBA(255, 0, 0, 1)
+        ChevronBackground: =RGBA(255, 0, 0, 1)
+        ChevronHoverBackground: =RGBA(109, 49, 162, 1)
+        DisplayFields: =["Result"]
+        Height: =39
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(109, 49, 162, 0.5)
+        InputTextPlaceholder: ="Planta"
+        Items: |-
+            =Ungroup(
+                Table(
+                    {cbxPlanta: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxPlanta: Sort(
+                            Filter(
+                                Distinct(
+                                    Plantas,
+                                    Plantas
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxPlanta"
+            )
+        PressedFill: =RGBA(255, 0, 0, 1)
+        SearchFields: =["Result"]
+        SearchItems: |-
+            =Search(Ungroup(
+                Table(
+                    {cbxPlanta: Table({Result:"TODOS",Value:1})},
+                    {
+                        cbxPlanta: Sort(
+                            Filter(
+                                Distinct(
+                                    Plantas,
+                                    Plantas
+                                ),
+                                Not(IsBlank(Result))
+                            )
+                            ,
+                            Result
+                        )
+                    }
+                ),
+                "cbxPlanta"
+            ),cbxPlanta.SearchText,"Result")
+        SelectionFill: =RGBA(109, 49, 162, 1)
+        SelectMultiple: =false
+        Width: =104
+        X: =295
+        Y: =30
+        ZIndex: =10
+

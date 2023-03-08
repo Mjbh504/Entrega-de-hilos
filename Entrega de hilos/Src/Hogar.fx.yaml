@@ -1,0 +1,142 @@
+Hogar As screen:
+    BackgroundImage: =R
+
+    Button6 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(109, 49, 162, 1)
+        Height: =285
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Text: =""
+        Width: =304
+        X: =531
+        Y: =110
+        ZIndex: =1
+
+    Image1 As image:
+        Height: =248
+        Image: =User().Image
+        RadiusBottomLeft: =100
+        RadiusBottomRight: =100
+        RadiusTopLeft: =100
+        RadiusTopRight: =100
+        Width: =248
+        X: =559
+        Y: =129
+        ZIndex: =4
+
+    Rectangle2_2 As rectangle:
+        BorderColor: =RGBA(109, 49, 162, 1)
+        Fill: =RGBA(109, 49, 162, 1)
+        Width: =1366
+        ZIndex: =6
+
+    Image2_2 As image:
+        Image: ='1200px-Hanes-logo.svg-1024x899'
+        X: =1266
+        ZIndex: =7
+
+    Group1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =9
+
+        Button5 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(109, 49, 162, 1)
+            Height: =49
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: =""
+            Width: =626
+            X: =370
+            Y: =402
+            ZIndex: =3
+
+        Label2 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.View
+            Height: =49
+            Text: ="Bienvenido "&User().FullName
+            Width: =427
+            X: =470
+            Y: =402
+            ZIndex: =5
+
+    Group4 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =9
+
+        Button5_1 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(109, 49, 162, 1)
+            Height: =49
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: =""
+            Width: =626
+            X: =370
+            Y: =460
+            ZIndex: =2
+
+        Label2_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.View
+            Height: =58
+            Text: |-
+                ="Tu Correo: "&User().Email
+            Width: =543
+            X: =404
+            Y: =451
+            ZIndex: =8
+
+    cmpMenuNav_1 As cmpMenuNav:
+        MenuItems: =C_MenuNav
+        ZIndex: =11
+
+    Group4_1 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =11
+
+        Button5_2 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(109, 49, 162, 1)
+            Height: =49
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: =""
+            Width: =626
+            X: =370
+            Y: =518
+            ZIndex: =9
+
+        Label2_2 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.View
+            Height: =58
+            Text: |-
+                ="Acceso: "&varpermisos
+            Width: =543
+            X: =404
+            Y: =509
+            ZIndex: =10
+
